@@ -29,7 +29,6 @@ public class MemberResponse {
                 .city(member.getAddress().getCity())
                 .street(member.getAddress().getStreet())
                 .zipcode(member.getAddress().getZipcode())
-                .orderCount(member.getOrderList().size())
                 .build();
     }
 }
