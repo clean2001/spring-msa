@@ -10,7 +10,6 @@ import javax.persistence.EntityNotFoundException;
 
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
-//    Page<Product> findAll(Pageable pageable);
     Page<Product> findAll(Specification<Product> specification, Pageable pageable);
 
     default Product findByIdOrThrow(Long id) {
