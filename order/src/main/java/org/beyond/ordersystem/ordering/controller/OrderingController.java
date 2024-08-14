@@ -24,7 +24,8 @@ public class OrderingController {
 
     @PostMapping("/order/create")
     public ResponseEntity<SuccessResponse> createOrder(@RequestBody List<CreateOrderRequest> createOrderRequest) {
-        CreateOrderResponse createOrderResponse = orderingService.createOrder(createOrderRequest);
+//        CreateOrderResponse createOrderResponse = orderingService.restTemplateCreateOrder(createOrderRequest);
+        CreateOrderResponse createOrderResponse = orderingService.feignClientCreateOrder(createOrderRequest);
 
         SuccessResponse response = SuccessResponse.builder()
                 .httpStatus(HttpStatus.CREATED)

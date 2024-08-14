@@ -19,8 +19,7 @@ public class CreateOrderDetailResponse {
     public static CreateOrderDetailResponse fromEntity(OrderDetail orderDetail) {
         return CreateOrderDetailResponse.builder()
                 .id(orderDetail.getId())
-                .productId(orderDetail.getProduct().getId())
-                .productName(orderDetail.getProduct().getName())
+                .productId(orderDetail.getProductId())
                 .count(orderDetail.getQuantity())
                 .build();
     }

@@ -4,8 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.beyond.ordersystem.member.domain.Member;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,9 +18,7 @@ public class Ordering {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
-    private Member member;
+    private String memberEmail;
 
     @Builder.Default
     @Enumerated(EnumType.STRING)

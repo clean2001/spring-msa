@@ -1,7 +1,10 @@
 package org.beyond.ordersystem.product.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.beyond.ordersystem.common.dto.ProductUpdateStockDto;
 import org.beyond.ordersystem.common.service.StockInventoryService;
 import org.beyond.ordersystem.product.domain.Product;
 import org.beyond.ordersystem.product.dto.CreateProductRequest;
@@ -140,4 +143,37 @@ public class ProductService {
         return productList
                 .map(ProductResponse::fromEntity);
     }
+
+    public ProductResponse productDetail(Long id) {
+        Product product = productRepository.findByIdOrThrow(id);
+        return ProductResponse.fromEntity(product);
+    }
+
+    public Product productUpdateStock(ProductUpdateStockDto dto) {
+        Product product = productRepository.findByIdOrThrow(dto.getProductId());
+        product.updateStockQuantity(dto.getQuantity());
+
+        return product;
+    }
+
+
+//    @KafkaListener(topics = "product-update-topic", groupId = "order-group", containerFactory = "kafkaListenerContainerFactory")
+    public void consumeProductQuantity(String message /*listen 하면 스트링 형태로 메시지가 들어온다*/) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            ProductUpdateStockDto productUpdateStockDto = objectMapper.readValue(message, ProductUpdateStockDto.class);
+            System.out.println("line 66" + productUpdateStockDto);
+
+            this.productUpdateStock(productUpdateStockDto);
+        } catch (JsonProcessingException e) {
+            // 원상 복구 시키는 코드
+            throw new RuntimeException(e);
+        } catch(Exception e) {
+            // 원상 복구 시키는 코드
+            // 원래는 재고 감소에 실패하면 주문 cancel하는 요청 날리는 부분이 필요하다.
+        }
+
+
+    }
+
 }

@@ -29,7 +29,8 @@ public class Product {
         this.imagePath = imagePath;
     }
 
-    public void decreaseStockQuantity(int count) {
+    public void updateStockQuantity(int count) {
         this.stockQuantity -= count;
     }
+
 }

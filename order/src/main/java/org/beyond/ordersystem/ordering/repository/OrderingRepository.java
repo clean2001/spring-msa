@@ -1,6 +1,5 @@
 package org.beyond.ordersystem.ordering.repository;
 
-import org.beyond.ordersystem.member.domain.Member;
 import org.beyond.ordersystem.ordering.domain.Ordering;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,5 +13,5 @@ public interface OrderingRepository extends JpaRepository<Ordering, Long> {
                 .orElseThrow(() -> new EntityNotFoundException("그런거 없어"));
     }
 
-    Page<Ordering> findAllByMember(Pageable pageable, Member member);
+    Page<Ordering> findAllByMemberEmail(Pageable pageable, String email);
 }

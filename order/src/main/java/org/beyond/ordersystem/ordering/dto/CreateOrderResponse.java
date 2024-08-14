@@ -26,10 +26,12 @@ public class CreateOrderResponse {
                 .map(CreateOrderDetailResponse::fromEntity)
                 .collect(Collectors.toList());
 
+
         return CreateOrderResponse.builder()
                 .id(order.getId())
-                .memberEmail(order.getMember().getEmail())
-                .memberId(order.getMember().getId())
+//                .memberEmail(order.getMember().getEmail())
+//                .memberId(order.getMember().getId())
+//                .memberEmail(email)
                 .orderStatus(order.getOrderStatus())
                 .orderDetailDtos(orderDetailResponseList)
                 .build();

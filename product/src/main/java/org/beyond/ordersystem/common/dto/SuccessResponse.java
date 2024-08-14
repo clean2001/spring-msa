@@ -8,14 +8,18 @@ import org.springframework.http.HttpStatus;
 
 
 @Getter
-public class SuccessResponse extends CustomResponse {
-    String statusMessage;
-    Object result;
+@AllArgsConstructor
+@NoArgsConstructor
+public class SuccessResponse{
+    private int statusCode;
+    private String statusMessage;
+    private Object result;
 
     @Builder
     public SuccessResponse(HttpStatus httpStatus, String statusMessage, Object result) {
-        super(httpStatus.value());
-        this.statusMessage = httpStatus.getReasonPhrase();
+        this.statusCode = httpStatus.value();
+        this.statusMessage = statusMessage;
         this.result = result;
     }
+
 }

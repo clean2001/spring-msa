@@ -4,9 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.beyond.ordersystem.member.domain.Member;
-import org.beyond.ordersystem.ordering.domain.OrderDetail;
-import org.beyond.ordersystem.ordering.domain.OrderStatus;
 import org.beyond.ordersystem.ordering.domain.Ordering;
 
 import java.util.List;
@@ -23,9 +20,9 @@ public class CreateOrderRequest {
     private Long productId;
     private Integer quantity;
 
-    public static Ordering toEntity(Member member) {
+    public static Ordering toEntity(String memberEmail) {
         return Ordering.builder()
-                .member(member)
+                .memberEmail(memberEmail)
 //                .orderStatus(ORDERED) // @Builder.Default로 대체
                 .build();
     }
